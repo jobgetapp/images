@@ -23,4 +23,4 @@ COPY --from=build /usr/share/postgresql /usr/share/postgresql
 RUN sed -r -i "s/^#(shared_preload_libraries\s*=\s*)''/\1'timescaledb'/" /usr/share/postgresql/postgresql.conf.sample
 
 # Create TimescaleDB extension on startup
-RUN echo 'CREATE EXTENSION timescaledb;' > /docker-entrypoint-initdb.d/timescaledb.sql
+RUN echo "psql -U postgres -d template1 -c 'CREATE EXTENSION timescaledb;'" > /docker-entrypoint-initdb.d/timescaledb.sh
