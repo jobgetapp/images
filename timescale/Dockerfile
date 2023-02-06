@@ -1,20 +1,25 @@
 # Install and configure TimescaleDB on the official Debian-based Postgres image
-FROM postgres:13 AS build
+ARG POSTGRES_MAJOR='13'
+ARG TIMESCALEDB_VERSION='2.9.2'
+
+FROM postgres:${POSTGRES_MAJOR} AS build
 
 # Install required packages
 RUN apt-get update \
-  && apt-get install -y build-essential git cmake postgresql-server-dev-13 libkrb5-dev
+  && apt-get install -y build-essential git cmake postgresql-server-dev-${POSTGRES_MAJOR} libkrb5-dev
 
 # Install postgres files
 RUN git clone https://github.com/timescale/timescaledb \
   && cd timescaledb \
-  && git checkout 2.9.1 \
+  && git checkout ${TIMESCALEDB_VERSION} \
   && ./bootstrap \
   && cd ./build \
   && make \
   && make install
 
-FROM postgres:13
+FROM postgres:${POSTGRES_MAJOR}
+
+# Copy installed files over
 
 COPY --from=build /usr/lib/postgresql /usr/lib/postgresql
 COPY --from=build /usr/share/postgresql /usr/share/postgresql
