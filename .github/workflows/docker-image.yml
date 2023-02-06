@@ -20,6 +20,10 @@ jobs:
     - name: Build the timescale-mongofdw image
       working-directory: ./timescale-mongofdw
       run: docker build . --tag timescale-mongofdw:latest
+    - name: Tag images for release
+      run: |
+        docker tag timescale:latest ghcr.io/jobgetapp/timescale:latest
+        docker tag timescale-mongofdw:latest ghcr.io/jobgetapp/timescale-mongofdw:latest
     - name: Publish images
       run: |
         docker push ghcr.io/jobgetapp/timescale:latest
