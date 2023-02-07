@@ -16,15 +16,15 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Build the timescale image
       working-directory: ./timescale
-      run: docker build . --tag timescale:latest
+      run: docker build . --tag timescale:pg13-latest
     - name: Build the timescale-mongofdw image
       working-directory: ./timescale-mongofdw
-      run: docker build . --tag timescale-mongofdw:latest
+      run: docker build . --tag timescale-mongofdw:pg13-latest
     - name: Tag images for release
       run: |
-        docker tag timescale:latest ghcr.io/jobgetapp/timescale:latest
-        docker tag timescale-mongofdw:latest ghcr.io/jobgetapp/timescale-mongofdw:latest
+        docker tag timescale:pg13-latest ghcr.io/jobgetapp/timescale:pg13-latest
+        docker tag timescale-mongofdw:pg13-latest ghcr.io/jobgetapp/timescale-mongofdw:pg13-latest
     - name: Publish images
       run: |
-        docker push ghcr.io/jobgetapp/timescale:latest
-        docker push ghcr.io/jobgetapp/timescale-mongofdw:latest
+        docker push ghcr.io/jobgetapp/timescale:pg13-latest
+        docker push ghcr.io/jobgetapp/timescale-mongofdw:pg13-latest

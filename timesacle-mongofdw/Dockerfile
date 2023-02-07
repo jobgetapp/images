@@ -1,5 +1,5 @@
 # Install the Mongo FDW extension on the timescale DB
-FROM timescale as build
+FROM timescale:pg13-latest as build
 
 # Install required packages
 RUN apt-get update \
@@ -21,7 +21,7 @@ RUN mkdir /tmp/mongo_fdw_source \
   && make \
   && make install
 
-FROM timescale
+FROM timescale:pg13-latest
 
 # Copy installed files over
 COPY --from=build /usr/share/postgresql /usr/share/postgresql
