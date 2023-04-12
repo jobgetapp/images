@@ -8,7 +8,7 @@ RUN apt-get update \
 # Install postgres files
 RUN git clone https://github.com/timescale/timescaledb \
   && cd timescaledb \
-  && git checkout 2.9.2 \
+  && git checkout 2.10.1 \
   && ./bootstrap \
   && cd ./build \
   && make \
