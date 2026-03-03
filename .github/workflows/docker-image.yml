@@ -20,11 +20,16 @@ jobs:
     - name: Build the timescale-mongofdw image
       working-directory: ./timescale-mongofdw
       run: docker build . --tag timescale-mongofdw:pg13-latest
+    - name: Build the aws lambda image
+      working-directory: ./aws/lambda
+      run: docker build . --tag aws-lambda:22-latest
     - name: Tag images for release
       run: |
         docker tag timescale:pg13-latest ghcr.io/jobgetapp/timescale:pg13-latest
         docker tag timescale-mongofdw:pg13-latest ghcr.io/jobgetapp/timescale-mongofdw:pg13-latest
+        docker tag lambda:22-latest ghcr.io/jobgetapp/aws-lambda:node22-latest
     - name: Publish images
       run: |
         docker push ghcr.io/jobgetapp/timescale:pg13-latest
         docker push ghcr.io/jobgetapp/timescale-mongofdw:pg13-latest
+        docker push ghcr.io/jobgetapp/aws-lambda:node22-latest
