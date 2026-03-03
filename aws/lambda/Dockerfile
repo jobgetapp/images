@@ -1,5 +1,5 @@
 # Build Node AWS Lambda
-ARG JG_NODE_VERSION=13
+ARG JG_NODE_VERSION=22
 FROM public.ecr.aws/docker/library/node:${JG_NODE_VERSION}-bookworm as build-image
 
 RUN apt-get update && \
