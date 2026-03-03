@@ -19,7 +19,7 @@ jobs:
       run: docker build . --tag aws-lambda:22-latest
     - name: Tag images for release
       run: |
-        docker tag lambda:22-latest ghcr.io/jobgetapp/aws-lambda:node22-latest
+        docker tag aws-lambda:22-latest ghcr.io/jobgetapp/aws-lambda:node22-latest
     - name: Publish images
       run: |
         docker push ghcr.io/jobgetapp/aws-lambda:node22-latest
